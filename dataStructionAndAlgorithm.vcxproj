@@ -152,6 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dataStructionAndAlgorithm.cpp" />
+    <ClCompile Include="xxb.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xxb.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
