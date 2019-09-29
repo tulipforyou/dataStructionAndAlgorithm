@@ -5,6 +5,7 @@
 创建人：孙朝辉
 */
 #include <iostream>
+#include"xxb.h"
 using namespace std;
 
 int main()
