@@ -87,4 +87,101 @@ public:
 		return listArray[curr];
 	}
 };
+
+//链表，继承于线性表
+template<typename T> class Link
+{
+public:
+	T element;
+	Link* next;
+	Link(const T& elemval,Link*nextval=NULL)
+	{
+		element = elemval; next = nextval;
+	}
+	Link(Link* nextval = NULL) { next = nextval; }
+};
+template<typename L>
+class lb :public xxb<L>
+{
+private:
+	Link<L>* head;	//头指针
+	Link<L>* tail;	//尾指针
+	Link<L>* curr;	//当前指针
+	int cnt;		//元素数
+	void init()
+	{
+		curr = head = tail = new Link<L>;
+		cnt = 0;
+	}
+	void removeAll() 
+	{
+		while (head != NULL)
+		{
+			curr = head;
+			head = head->next;
+			delete curr;
+		}
+	}
+public:
+	lb() { init(); }
+	~lb() { removeAll(); }
+	void print()const;
+	void clear() { removeAll(); init(); }
+	void insert(const L& item)
+	{
+		curr->next = new Link<L>(item, curr->next);
+		if (tail = curr) tail = curr->next;
+		cnt++;
+	}
+	void append(const L& item)
+	{
+		tail = tail->next = new Link(item, NULL);
+		cnt++;
+	}
+	L remove()
+	{
+		assert(curr > next != NULL, "no element");
+		L it = curr->next->element;
+		Link<L>* itemp = curr->next;
+		if (tail = curr->next)tail = curr;
+		curr->next = curr->next->next;
+		delete itemp;
+		cnt--;
+		return it;
+	}
+	void moveToStart() { curr = head; }
+	void moveToEnd() { curr = tail; }
+	void prev()
+	{
+		if (curr == head)return;
+		Link<L>* temp = head;
+		while (temp->next != curr)temp = temp->next;
+		curr = temp;
+	}
+	void next()
+	{
+		if (curr != tail) curr = curr->next;
+	}
+	int length() const { return cnt; }
+	int currPos() const 
+	{
+		Link<L>* temp = head;
+		int i;
+		for (i = 0; curr != temp; i++)
+			temp = temp->next;
+		return i;
+	}
+	void moveToPos(int pos)
+	{
+		assert((pos >= 0) && (pos <= cnt), "position is wrong!");
+		curr = head;
+		for (int i = 0; i < pos; i++)
+			curr = curr->next;
+	}
+	const L& getValue() const
+	{
+		assert(curr->next != NULL, "No value");
+		return curr->next->element;
+	}
+};
 #endif
